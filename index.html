@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>O Level Computer Quiz</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            O Level Quiz
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#olevel">O Level</a>
+            <a href="#coding">Coding Skills</a>
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <p class="welcome">
+                WELCOME TO
+            </p>
+
+            <h1>
+                O Level Computer Quiz
+            </h1>
+
+            <p>
+                Practice O Level M1, M2, M3, M4
+                and Coding Skills with interactive MCQs.
+            </p>
+
+            <button onclick="startLearning()">
+                Start Learning
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- O LEVEL -->
+
+    <section id="olevel" class="subjects">
+
+        <div class="section-heading">
+
+            <h2>
+                O Level Modules
+            </h2>
+
+            <p>
+                Select a module and start practicing.
+            </p>
+
+        </div>
+
+
+        <div class="card-container">
+
+
+            <!-- M1 -->
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    M1
+                </div>
+
+                <h3>
+                    M1
+                </h3>
+
+                <p>
+                    Information Technology Tools
+                    and Network Basics
+                </p>
+
+                <button onclick="startQuiz('M1')">
+
+                    Start Quiz
+
+                </button>
+
+            </div>
+
+
+            <!-- M2 -->
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    M2
+                </div>
+
+                <h3>
+                    M2
+                </h3>
+
+                <p>
+                    Web Designing and Publishing
+                </p>
+
+                <button onclick="startQuiz('M2')">
+
+                    Start Quiz
+
+                </button>
+
+            </div>
+
+
+            <!-- M3 -->
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    M3
+                </div>
+
+                <h3>
+                    M3
+                </h3>
+
+                <p>
+                    Programming and Problem Solving
+                </p>
+
+                <button onclick="startQuiz('M3')">
+
+                    Start Quiz
+
+                </button>
+
+            </div>
+
+
+            <!-- M4 -->
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    M4
+                </div>
+
+                <h3>
+                    M4
+                </h3>
+
+                <p>
+                    Internet of Things
+                    and its Applications
+                </p>
+
+                <button onclick="startQuiz('M4')">
+
+                    Start Quiz
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CODING -->
+
+    <section id="coding" class="subjects coding-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Coding Skills
+            </h2>
+
+            <p>
+                Improve your programming knowledge.
+            </p>
+
+        </div>
+
+
+        <div class="card-container">
+
+
+            <!-- HTML -->
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    HTML
+                </div>
+
+                <h3>
+                    HTML
+                </h3>
+
+                <p>
+                    Learn and practice HTML
+                    fundamentals.
+                </p>
+
+                <button onclick="startQuiz('HTML')">
+
+                    Start Quiz
+
+                </button>
+
+            </div>
+
+
+            <!-- CSS -->
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    CSS
+                </div>
+
+                <h3>
+                    CSS
+                </h3>
+
+                <p>
+                    Practice CSS selectors,
+                    properties and layouts.
+                </p>
+
+                <button onclick="startQuiz('CSS')">
+
+                    Start Quiz
+
+                </button>
+
+            </div>
+
+
+            <!-- JAVASCRIPT -->
+
+            <div class="subject-card">
+
+                <div class="subject-icon">
+                    JS
+                </div>
+
+                <h3>
+                    JavaScript
+                </h3>
+
+                <p>
+                    Practice JavaScript
+                    programming concepts.
+                </p>
+
+                <button onclick="startQuiz('JavaScript')">
+
+                    Start Quiz
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>
+            O Level Computer Quiz
+        </h3>
+
+        <p>
+            Learn • Practice • Improve
+        </p>
+
+        <p>
+            © 2026 O Level Quiz
+        </p>
+
+    </footer>
+
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
