@@ -1,5 +1,3 @@
-
-
 // ========================================
 // QUIZ VARIABLES
 // ========================================
@@ -9,31 +7,47 @@ let questions = [];
 let currentQuestion = 0;
 let score = 0;
 
+
 // ========================================
 // START QUIZ
 // ========================================
+
 function startQuiz(subject) {
 
     console.log("Starting quiz:", subject);
 
+    // Check whether questions.js is loaded
+    if (typeof quizData === "undefined") {
+        alert("Quiz data not loaded! Please check questions.js");
+        console.error("quizData is not defined");
+        return;
+    }
+
+    // Check selected subject
     if (!quizData[subject]) {
         alert("Questions not found for " + subject);
+        console.error("Available subjects:", Object.keys(quizData));
         return;
     }
 
     currentSubject = subject;
 
+    // Copy questions from questions.js
     let allQuestions = [...quizData[subject]];
 
+    // Shuffle questions
     allQuestions.sort(() => Math.random() - 0.5);
 
+    // Take maximum 20 questions
     questions = allQuestions.slice(0, 20);
 
     currentQuestion = 0;
     score = 0;
 
+    // Show first question
     showQuestion();
 }
+
 
 // ========================================
 // SHOW QUESTION
@@ -41,9 +55,13 @@ function startQuiz(subject) {
 
 function showQuestion() {
 
-    
-
     const question = questions[currentQuestion];
+
+    // Safety check
+    if (!question) {
+        console.error("Question not found:", currentQuestion);
+        return;
+    }
 
     const progress =
         ((currentQuestion + 1) / questions.length) * 100;
@@ -56,6 +74,7 @@ function showQuestion() {
             <p class="quiz-title">
                 ${currentSubject} Quiz
             </p>
+
 
             <div class="quiz-top">
 
@@ -71,6 +90,8 @@ function showQuestion() {
             </div>
 
 
+            <!-- Progress Bar -->
+
             <div class="progress-container">
 
                 <div
@@ -81,6 +102,8 @@ function showQuestion() {
             </div>
 
 
+            <!-- Question -->
+
             <h2 class="quiz-question">
 
                 ${question.question}
@@ -88,28 +111,30 @@ function showQuestion() {
             </h2>
 
 
+            <!-- Options -->
+
             <div class="quiz-options">
 
-                ${question.options.map(
-        function (option, index) {
+                ${question.options.map(function (option, index) {
 
-            return `
+        return `
 
-                            <button
-                                class="quiz-option"
-                                onclick="selectAnswer(${index})">
+                        <button
+                            class="quiz-option"
+                            onclick="selectAnswer(${index})">
 
-                                ${option}
+                            ${option}
 
-                            </button>
+                        </button>
 
-                        `;
+                    `;
 
-        }
-    ).join("")}
+    }).join("")}
 
             </div>
 
+
+            <!-- Next Button -->
 
             <button
                 id="nextBtn"
@@ -133,6 +158,7 @@ function showQuestion() {
         behavior: "smooth"
 
     });
+
 }
 
 
@@ -142,8 +168,7 @@ function showQuestion() {
 
 function selectAnswer(selectedAnswer) {
 
-    const questions = quizData[currentSubject];
-
+    // Use current shuffled question
     const question = questions[currentQuestion];
 
     const options =
@@ -164,15 +189,19 @@ function selectAnswer(selectedAnswer) {
     options[question.answer].classList.add("correct");
 
 
-    // Show wrong answer
+    // Check selected answer
 
     if (selectedAnswer !== question.answer) {
+
+        // Wrong answer
 
         options[selectedAnswer].classList.add("wrong");
 
     }
 
     else {
+
+        // Correct answer
 
         score++;
 
@@ -194,16 +223,21 @@ function nextQuestion() {
 
     currentQuestion++;
 
+
     if (currentQuestion < questions.length) {
 
         showQuestion();
 
-    } else {
+    }
+
+    else {
 
         showResult();
 
     }
+
 }
+
 
 // ========================================
 // SHOW RESULT
@@ -211,10 +245,10 @@ function nextQuestion() {
 
 function showResult() {
 
-    const questions = quizData[currentSubject];
-
     const percentage =
-        Math.round((score / questions.length) * 100);
+        Math.round(
+            (score / questions.length) * 100
+        );
 
 
     let resultText;
@@ -222,13 +256,15 @@ function showResult() {
 
     if (percentage >= 50) {
 
-        resultText = "🎉 Congratulations! You Passed!";
+        resultText =
+            "🎉 Congratulations! You Passed!";
 
     }
 
     else {
 
-        resultText = "Keep Practicing! 💪";
+        resultText =
+            "Keep Practicing! 💪";
 
     }
 
@@ -241,6 +277,7 @@ function showResult() {
                 Quiz Completed! 🎉
             </h1>
 
+
             <h2>
                 ${currentSubject}
             </h2>
@@ -252,9 +289,11 @@ function showResult() {
                     Your Score
                 </p>
 
+
                 <strong>
                     ${score} / ${questions.length}
                 </strong>
+
 
                 <p>
                     Percentage: ${percentage}%
@@ -266,6 +305,9 @@ function showResult() {
             <h2>
                 ${resultText}
             </h2>
+
+
+            <br>
 
 
             <button
@@ -297,6 +339,8 @@ function showResult() {
     });
 
 }
+
+
 // ========================================
 // HOME
 // ========================================
