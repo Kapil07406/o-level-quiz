@@ -41,6 +41,9 @@ function startQuiz(subject) {
     // Take maximum 20 questions
     questions = allQuestions;
 
+    console.log("TOTAL QUESTIONS:", questions.length);
+    console.log("SUBJECT:", currentSubject);
+
     currentQuestion = 0;
     score = 0;
 
