@@ -39,7 +39,7 @@ function startQuiz(subject) {
     allQuestions.sort(() => Math.random() - 0.5);
 
     // Take maximum 20 questions
-    questions = allQuestions.slice(0, 20);
+    questions = allQuestions;
 
     currentQuestion = 0;
     score = 0;
