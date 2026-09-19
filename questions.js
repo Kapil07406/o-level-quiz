@@ -619,6 +619,310 @@ const quizData = {
             answer: 2,
             correctAnswer: "Keyboard"
         },
+    ],
+
+    Weekly: [
+
+        {
+            question: "Where is the document name displayed in LibreOffice Writer?",
+            options: ["Status Bar", "Title Bar", "Menu Bar", "Sidebar"],
+            answer: 1
+        },
+
+        {
+            question: "What is the default name of a new Writer document?",
+            options: ["Document1", "Untitled 1", "New Document", "Writer1"],
+            answer: 1
+        },
+
+        {
+            question: "Which feature helps you set margins and tab stops in Writer?",
+            options: ["Ruler", "Sidebar", "Status Bar", "Navigator"],
+            answer: 0
+        },
+
+        {
+            question: "Which area is used to access properties and formatting options?",
+            options: ["Ruler", "Sidebar", "Title Bar", "Status Bar"],
+            answer: 1
+        },
+
+        {
+            question: "What is the default zoom level in LibreOffice Writer?",
+            options: ["50%", "75%", "100%", "125%"],
+            answer: 2
+        },
+
+        {
+            question: "What is the minimum zoom level in Writer?",
+            options: ["10%", "20%", "25%", "50%"],
+            answer: 1
+        },
+
+        {
+            question: "What is the maximum zoom level in Writer?",
+            options: ["200%", "300%", "400%", "500%"],
+            answer: 2
+        },
+
+        {
+            question: "Which shortcut inserts a page break?",
+            options: ["Ctrl + Enter", "Shift + Enter", "Ctrl + Shift + Enter", "Alt + Enter"],
+            answer: 0
+        },
+
+        {
+            question: "Which shortcut inserts a line break?",
+            options: ["Ctrl + Enter", "Shift + Enter", "Alt + Enter", "Ctrl + Shift + Enter"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut inserts a manual page break?",
+            options: ["Ctrl + Enter", "Ctrl + Shift + Enter", "Shift + Enter", "Alt + Enter"],
+            answer: 0
+        },
+
+        {
+            question: "What is the default page orientation in Writer?",
+            options: ["Landscape", "Portrait", "Square", "Automatic"],
+            answer: 1
+        },
+
+        {
+            question: "What is the default page margin in Writer?",
+            options: ["0.5 inch", "1 inch", "1.5 inch", "2 inch"],
+            answer: 1
+        },
+
+        {
+            question: "What is the default highlight color?",
+            options: ["Yellow", "Blue", "Green", "Red"],
+            answer: 0
+        },
+
+        {
+            question: "Which option changes the case of selected text?",
+            options: ["Toggle Case", "Font Color", "Highlight", "Character"],
+            answer: 0
+        },
+
+        {
+            question: "Which command cycles through different text cases?",
+            options: ["Change Case", "Cycle Case", "Toggle Case", "Text Case"],
+            answer: 1
+        },
+
+        {
+            question: "Which list uses symbols instead of numbers?",
+            options: ["Numbered List", "Ordered List", "Bulleted List", "Multilevel List"],
+            answer: 2
+        },
+
+        {
+            question: "What is the default bullet symbol?",
+            options: ["Square", "Circle", "Arrow", "Star"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut toggles bullets?",
+            options: ["Shift + F12", "F12", "Ctrl + F12", "Alt + F12"],
+            answer: 0
+        },
+
+        {
+            question: "Which list uses numbers?",
+            options: ["Bulleted List", "Numbered List", "Symbol List", "Bullet List"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut is used to insert a table?",
+            options: ["Ctrl + F12", "F12", "Shift + F12", "Alt + F12"],
+            answer: 0
+        },
+
+        {
+            question: "How can you increase the width of a table?",
+            options: ["Drag the table border", "Press F12", "Use Navigator", "Use Status Bar"],
+            answer: 0
+        },
+
+        {
+            question: "How can you decrease the width of a table?",
+            options: ["Drag the table border inward", "Press Ctrl + Enter", "Use Sidebar", "Use Navigator"],
+            answer: 0
+        },
+
+        {
+            question: "What appears when an object is selected for resizing?",
+            options: ["Rulers", "Resize handles", "Status Bar", "Navigator"],
+            answer: 1
+        },
+
+        {
+            question: "Which key combination is commonly used to duplicate an object?",
+            options: ["Ctrl + C", "Ctrl + D", "Ctrl + V", "Ctrl + X"],
+            answer: 1
+        },
+
+        {
+            question: "What is the extension of a Writer template?",
+            options: [".odt", ".ott", ".ods", ".odp"],
+            answer: 1
+        },
+
+        {
+            question: "What is the default extension of a Writer document?",
+            options: [".odt", ".ott", ".ods", ".odp"],
+            answer: 0
+        },
+
+        {
+            question: "Which command is used to save a document with a different name?",
+            options: ["Save", "Save All", "Save As", "Export"],
+            answer: 2
+        },
+
+        {
+            question: "Where can you create or manage custom templates?",
+            options: ["Template Manager", "Navigator", "Sidebar", "Status Bar"],
+            answer: 0
+        },
+
+        {
+            question: "Which command saves all open documents?",
+            options: ["Save", "Save As", "Save All", "Export"],
+            answer: 2
+        },
+
+        {
+            question: "Which shortcut opens Template Manager?",
+            options: ["Ctrl + Shift + N", "Ctrl + F12", "Ctrl + N", "Alt + N"],
+            answer: 0
+        },
+
+        {
+            question: "Which shortcut opens Extension Manager?",
+            options: ["Ctrl + Alt + E", "Ctrl + Shift + E", "Alt + E", "Ctrl + E"],
+            answer: 1
+        },
+
+        {
+            question: "Which feature is used to search and replace text?",
+            options: ["Navigator", "Find and Replace", "Word Count", "AutoCorrect"],
+            answer: 1
+        },
+
+        {
+            question: "Find and Replace is available under which menu?",
+            options: ["File", "Edit", "View", "Insert"],
+            answer: 1
+        },
+
+        {
+            question: "Which menu contains the option to donate to LibreOffice?",
+            options: ["Help", "File", "Tools", "View"],
+            answer: 0
+        },
+
+        {
+            question: "Which option is used to insert the page number field?",
+            options: ["Insert > Field > Page Number", "File > Page Number", "View > Page Number", "Tools > Page Number"],
+            answer: 0
+        },
+
+        {
+            question: "What can be inserted in a Header or Footer?",
+            options: ["Page number", "Date", "Text", "All of these"],
+            answer: 3
+        },
+
+        {
+            question: "Which shortcut activates Full Screen mode?",
+            options: ["Ctrl + Shift + J", "Ctrl + J", "F11", "Ctrl + F11"],
+            answer: 0
+        },
+
+        {
+            question: "Track Changes is available under which menu?",
+            options: ["File", "Edit", "View", "Tools"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut opens the Navigator?",
+            options: ["F5", "F7", "F9", "F11"],
+            answer: 0
+        },
+
+        {
+            question: "Where is the New Window command generally found?",
+            options: ["File", "Window", "View", "Tools"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut creates a new document?",
+            options: ["Ctrl + N", "Ctrl + O", "Ctrl + S", "Ctrl + P"],
+            answer: 0
+        },
+
+        {
+            question: "Which shortcut opens an existing document?",
+            options: ["Ctrl + N", "Ctrl + O", "Ctrl + S", "Ctrl + P"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut saves a document?",
+            options: ["Ctrl + S", "Ctrl + O", "Ctrl + N", "Ctrl + P"],
+            answer: 0
+        },
+
+        {
+            question: "Which shortcut prints a document?",
+            options: ["Ctrl + S", "Ctrl + P", "Ctrl + O", "Ctrl + N"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut selects all content?",
+            options: ["Ctrl + A", "Ctrl + C", "Ctrl + X", "Ctrl + V"],
+            answer: 0
+        },
+
+        {
+            question: "Which shortcut is used for Undo?",
+            options: ["Ctrl + Y", "Ctrl + Z", "Ctrl + U", "Ctrl + R"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut is used for Redo?",
+            options: ["Ctrl + Z", "Ctrl + Y", "Ctrl + R", "Ctrl + D"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut makes text Bold?",
+            options: ["Ctrl + B", "Ctrl + I", "Ctrl + U", "Ctrl + D"],
+            answer: 0
+        },
+
+        {
+            question: "Which shortcut makes text Italic?",
+            options: ["Ctrl + B", "Ctrl + I", "Ctrl + U", "Ctrl + T"],
+            answer: 1
+        },
+
+        {
+            question: "Which shortcut Underlines text?",
+            options: ["Ctrl + B", "Ctrl + I", "Ctrl + U", "Ctrl + L"],
+            answer: 2
+        }
+
     ]
 };
 
