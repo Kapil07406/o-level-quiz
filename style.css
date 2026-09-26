@@ -543,13 +543,13 @@ footer p {
     margin: 10px 0;
 }
 
-/* =================================
-   QUIZ SCREEN - FINAL DESIGN
-================================= */
+/* ========================================
+   FINAL QUIZ DESIGN
+======================================== */
 
 #quizSection {
+    padding: 60px 20px;
     min-height: 70vh;
-    padding: 50px 20px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -566,30 +566,31 @@ footer p {
 
 .quiz-box {
     width: 100%;
+    max-width: 850px;
     background: #ffffff;
-    border-radius: 18px;
-    padding: 35px;
-    box-sizing: border-box;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    padding: 40px;
+    border-radius: 20px;
+    color: #1f2937;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
     text-align: center;
 }
 
 
 /* QUIZ TITLE */
 
-.quiz-box h2 {
-    margin: 0 0 12px;
+.quiz-box>h2 {
+    color: #2563eb;
     font-size: 28px;
-    color: #222;
+    margin-bottom: 10px;
 }
 
 
 /* QUESTION NUMBER */
 
-.quiz-box h3 {
-    margin: 10px 0 25px;
-    font-size: 18px;
-    color: #555;
+.quiz-box>h3 {
+    color: #6b7280;
+    font-size: 17px;
+    margin-bottom: 30px;
 }
 
 
@@ -600,20 +601,20 @@ footer p {
 }
 
 .quiz-box .question h2 {
-    font-size: 22px;
+    font-size: 23px;
     line-height: 1.5;
-    color: #222;
+    color: #111827;
+    margin-bottom: 0;
 }
 
 
 /* OPTIONS */
 
 .quiz-box .options {
-    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 20px;
+    gap: 18px;
+    width: 100%;
 }
 
 
@@ -621,39 +622,40 @@ footer p {
 
 .quiz-box .option {
     width: 100%;
-    min-height: 60px;
-    padding: 14px 18px;
+    min-height: 65px;
 
-    border: none;
-    border-radius: 12px;
+    padding: 15px 20px;
 
-    background: #1976d2;
+    background: #2563eb;
     color: white;
+
+    border: 2px solid #2563eb;
+    border-radius: 12px;
 
     font-size: 16px;
     font-weight: 600;
 
     text-align: left;
-    line-height: 1.4;
 
     cursor: pointer;
 
-    transition: 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 
-/* HOVER */
+/* OPTION HOVER */
 
 .quiz-box .option:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
     transform: translateY(-2px);
-    background: #125ca8;
 }
 
 
 /* DISABLED */
 
 .quiz-box .option:disabled {
-    cursor: default;
+    cursor: not-allowed;
 }
 
 
@@ -661,48 +663,82 @@ footer p {
 
 .quiz-box .progress-container {
     width: 100%;
-    height: 8px;
+    height: 9px;
+
     background: #e5e7eb;
+
     border-radius: 20px;
-    margin-top: 30px;
+
+    margin-top: 35px;
+
     overflow: hidden;
 }
 
 
 .quiz-box .progress-bar {
     height: 100%;
-    background: #1976d2;
+
+    background: #2563eb;
+
     border-radius: 20px;
-    transition: width 0.3s ease;
+
+    transition: width 0.4s ease;
 }
 
 
-/* MOBILE */
+/* ========================================
+   RESULT PAGE
+======================================== */
 
-@media (max-width: 600px) {
+.result-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.result-box h2 {
+    color: #2563eb;
+    margin-bottom: 15px;
+}
+
+.result-box h3 {
+    color: #6b7280;
+}
+
+.result-box h1 {
+    font-size: 55px;
+    color: #2563eb;
+    margin: 25px 0;
+}
+
+.result-box button {
+    margin: 8px;
+}
+
+
+/* ========================================
+   MOBILE QUIZ
+======================================== */
+
+@media (max-width: 700px) {
 
     #quizSection {
-        padding: 25px 12px;
+        padding: 30px 12px;
     }
 
     .quiz-box {
-        padding: 22px 16px;
-        border-radius: 14px;
+        padding: 25px 18px;
+        border-radius: 15px;
     }
 
-    .quiz-box h2 {
-        font-size: 23px;
-    }
-
-    .quiz-box h3 {
-        font-size: 16px;
+    .quiz-box>h2 {
+        font-size: 24px;
     }
 
     .quiz-box .question h2 {
-        font-size: 18px;
+        font-size: 19px;
     }
 
-    /* One option per row on mobile */
+    /* Mobile: one option per row */
 
     .quiz-box .options {
         grid-template-columns: 1fr;
@@ -710,8 +746,9 @@ footer p {
     }
 
     .quiz-box .option {
-        min-height: 55px;
+        min-height: 58px;
         font-size: 15px;
         padding: 13px 15px;
     }
+
 }
