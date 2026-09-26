@@ -1,319 +1,270 @@
-// ========================================
-// QUIZ VARIABLES
-// ========================================
-
 let currentSubject = "";
 let questions = [];
 let currentQuestion = 0;
 let score = 0;
 
 
-// ========================================
+// ===============================
+// SHUFFLE FUNCTION
+// ===============================
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+
+        let j = Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
+}
+
+
+// ===============================
 // START QUIZ
-// ========================================
+// ===============================
 
 function startQuiz(subject) {
 
-    console.log("Starting quiz:", subject);
-
-    // Check whether questions.js is loaded
-    if (typeof quizData === "undefined") {
-        alert("Quiz data not loaded! Please check questions.js");
-        console.error("quizData is not defined");
-        return;
-    }
-
-    // Check selected subject
     if (!quizData[subject]) {
-        alert("Questions not found for " + subject);
-        console.error("Available subjects:", Object.keys(quizData));
+        alert("Quiz questions not found!");
         return;
     }
 
     currentSubject = subject;
-
-    // Copy questions from questions.js
-    let allQuestions = [...quizData[subject]];
-
-    // Shuffle questions
-    allQuestions.sort(() => Math.random() - 0.5);
-
-    // Take maximum 20 questions
-    questions = allQuestions;
-
-    console.log("TOTAL QUESTIONS:", questions.length);
-    console.log("SUBJECT:", currentSubject);
-
     currentQuestion = 0;
     score = 0;
 
-    // Show first question
+
+    // Make a new copy of all questions
+    let allQuestions = quizData[subject].map(function (q) {
+
+        // Keep track of correct answer
+        let optionData = q.options.map(function (option, index) {
+
+            return {
+                text: option,
+                correct: index === q.answer
+            };
+
+        });
+
+
+        // Randomize options
+        shuffleArray(optionData);
+
+
+        return {
+
+            question: q.question,
+
+            options: optionData.map(function (item) {
+                return item.text;
+            }),
+
+            answer: optionData.findIndex(function (item) {
+                return item.correct;
+            })
+
+        };
+
+    });
+
+
+    // Randomize question order
+    shuffleArray(allQuestions);
+
+
+    // USE ALL 50 QUESTIONS
+    questions = allQuestions;
+
+
     showQuestion();
 }
 
 
-// ========================================
+// ===============================
 // SHOW QUESTION
-// ========================================
+// ===============================
 
 function showQuestion() {
 
-    const question = questions[currentQuestion];
+    if (currentQuestion >= questions.length) {
 
-    // Safety check
-    if (!question) {
-        console.error("Question not found:", currentQuestion);
+        showResult();
         return;
     }
 
-    const progress =
-        ((currentQuestion + 1) / questions.length) * 100;
+
+    const quizContainer = document.getElementById("quizContainer");
+
+    if (!quizContainer) {
+        console.error("quizContainer not found!");
+        return;
+    }
 
 
-    document.querySelector(".hero").innerHTML = `
+    const q = questions[currentQuestion];
 
-        <div class="quiz-box">
 
-            <p class="quiz-title">
-                ${currentSubject} Quiz
+    let html = `
+
+        <div class="quiz-header">
+
+            <h2>${currentSubject} Quiz</h2>
+
+            <p>
+                Question ${currentQuestion + 1}
+                / ${questions.length}
             </p>
 
-
-            <div class="quiz-top">
-
-                <span>
-                    Question ${currentQuestion + 1}
-                    / ${questions.length}
-                </span>
-
-                <span>
-                    Score: ${score}
-                </span>
-
-            </div>
+        </div>
 
 
-            <!-- Progress Bar -->
+        <div class="question-box">
 
-            <div class="progress-container">
-
-                <div
-                    class="progress-bar"
-                    style="width: ${progress}%">
-                </div>
-
-            </div>
+            <h3>${q.question}</h3>
 
 
-            <!-- Question -->
+            <div class="options">
 
-            <h2 class="quiz-question">
-
-                ${question.question}
-
-            </h2>
-
-
-            <!-- Options -->
-
-            <div class="quiz-options">
-
-                ${question.options.map(function (option, index) {
+                ${q.options.map(function (option, index) {
 
         return `
-
                         <button
-                            class="quiz-option"
+                            class="option"
                             onclick="selectAnswer(${index})">
 
+                            ${String.fromCharCode(65 + index)}.
                             ${option}
 
                         </button>
-
                     `;
 
     }).join("")}
 
             </div>
 
+        </div>
 
-            <!-- Next Button -->
 
-            <button
-                id="nextBtn"
-                class="next-btn"
-                onclick="nextQuestion()"
-                disabled>
+        <div class="quiz-footer">
 
-                Next Question →
+            <div class="progress-container">
 
-            </button>
+                <div
+                    class="progress-bar"
+                    style="width:${((currentQuestion + 1) / questions.length) * 100}%">
+                </div>
+
+            </div>
 
         </div>
 
     `;
 
 
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
+    quizContainer.innerHTML = html;
 }
 
 
-// ========================================
+// ===============================
 // SELECT ANSWER
-// ========================================
+// ===============================
 
-function selectAnswer(selectedAnswer) {
+function selectAnswer(selectedIndex) {
 
-    // Use current shuffled question
-    const question = questions[currentQuestion];
+    const q = questions[currentQuestion];
 
-    const options =
-        document.querySelectorAll(".quiz-option");
+    const buttons = document.querySelectorAll(".option");
 
 
-    // Disable all options
-
-    options.forEach(function (button) {
+    buttons.forEach(function (button, index) {
 
         button.disabled = true;
+
+
+        if (index === q.answer) {
+
+            button.classList.add("correct");
+
+        }
+
+
+        if (
+            index === selectedIndex &&
+            selectedIndex !== q.answer
+        ) {
+
+            button.classList.add("wrong");
+
+        }
 
     });
 
 
-    // Show correct answer
-
-    options[question.answer].classList.add("correct");
-
-
-    // Check selected answer
-
-    if (selectedAnswer !== question.answer) {
-
-        // Wrong answer
-
-        options[selectedAnswer].classList.add("wrong");
-
-    }
-
-    else {
-
-        // Correct answer
+    if (selectedIndex === q.answer) {
 
         score++;
 
     }
 
 
-    // Enable Next button
+    setTimeout(function () {
 
-    document.getElementById("nextBtn").disabled = false;
+        nextQuestion();
 
+    }, 700);
 }
 
 
-// ========================================
+// ===============================
 // NEXT QUESTION
-// ========================================
+// ===============================
 
 function nextQuestion() {
 
     currentQuestion++;
 
-
-    if (currentQuestion < questions.length) {
-
-        showQuestion();
-
-    }
-
-    else {
-
-        showResult();
-
-    }
+    showQuestion();
 
 }
 
 
-// ========================================
+// ===============================
 // SHOW RESULT
-// ========================================
+// ===============================
 
 function showResult() {
 
-    const percentage =
-        Math.round(
-            (score / questions.length) * 100
-        );
+    const quizContainer =
+        document.getElementById("quizContainer");
 
 
-    let resultText;
+    let percentage =
+        Math.round((score / questions.length) * 100);
 
 
-    if (percentage >= 50) {
+    quizContainer.innerHTML = `
 
-        resultText =
-            "🎉 Congratulations! You Passed!";
+        <div class="result-box">
 
-    }
+            <h2>🎉 Quiz Completed!</h2>
 
-    else {
-
-        resultText =
-            "Keep Practicing! 💪";
-
-    }
+            <h3>${currentSubject}</h3>
 
 
-    document.querySelector(".hero").innerHTML = `
+            <div class="result-score">
 
-        <div class="quiz-box result-box">
+                <h1>${score} / ${questions.length}</h1>
 
-            <h1>
-                Quiz Completed! 🎉
-            </h1>
-
-
-            <h2>
-                ${currentSubject}
-            </h2>
-
-
-            <div class="final-score">
-
-                <p>
-                    Your Score
-                </p>
-
-
-                <strong>
-                    ${score} / ${questions.length}
-                </strong>
-
-
-                <p>
-                    Percentage: ${percentage}%
-                </p>
+                <p>${percentage}%</p>
 
             </div>
 
 
-            <h2>
-                ${resultText}
-            </h2>
-
-
-            <br>
-
-
             <button
+                class="btn"
                 onclick="startQuiz('${currentSubject}')">
 
                 🔄 Try Again
@@ -322,6 +273,7 @@ function showResult() {
 
 
             <button
+                class="btn"
                 onclick="goHome()">
 
                 🏠 Home
@@ -331,42 +283,30 @@ function showResult() {
         </div>
 
     `;
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
 }
 
 
-// ========================================
-// HOME
-// ========================================
+// ===============================
+// GO HOME
+// ===============================
 
 function goHome() {
 
-    location.reload();
+    window.location.href = "index.html";
 
 }
 
 
-// ========================================
-// START LEARNING BUTTON
-// ========================================
+// ===============================
+// LEARNING BUTTON
+// ===============================
 
-function startLearning() {
+function startLearning(subject) {
 
-    document
-        .getElementById("olevel")
-        .scrollIntoView({
-
-            behavior: "smooth"
-
-        });
+    alert(
+        "Learning section for " +
+        subject +
+        " will be available soon!"
+    );
 
 }
