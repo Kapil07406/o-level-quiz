@@ -4,11 +4,9 @@ let currentQuestion = 0;
 let score = 0;
 
 
-// ===============================
-// SHUFFLE FUNCTION
-// ===============================
-
+// SHUFFLE
 function shuffleArray(array) {
+
     for (let i = array.length - 1; i > 0; i--) {
 
         let j = Math.floor(Math.random() * (i + 1));
@@ -20,14 +18,20 @@ function shuffleArray(array) {
 }
 
 
-// ===============================
 // START QUIZ
-// ===============================
-
 function startQuiz(subject) {
 
+    console.log("Starting quiz:", subject);
+
+    if (typeof quizData === "undefined") {
+
+        alert("questions.js load nahi ho rahi!");
+        return;
+    }
+
     if (!quizData[subject]) {
-        alert("Quiz questions not found!");
+
+        alert("Questions not found for: " + subject);
         return;
     }
 
@@ -36,10 +40,9 @@ function startQuiz(subject) {
     score = 0;
 
 
-    // Make a new copy of all questions
+    // COPY QUESTIONS
     let allQuestions = quizData[subject].map(function (q) {
 
-        // Keep track of correct answer
         let optionData = q.options.map(function (option, index) {
 
             return {
@@ -50,7 +53,7 @@ function startQuiz(subject) {
         });
 
 
-        // Randomize options
+        // RANDOM OPTIONS
         shuffleArray(optionData);
 
 
@@ -71,35 +74,40 @@ function startQuiz(subject) {
     });
 
 
-    // Randomize question order
+    // RANDOM QUESTION ORDER
     shuffleArray(allQuestions);
 
 
-    // USE ALL 50 QUESTIONS
+    // ALL QUESTIONS
     questions = allQuestions;
+
+
+    // HIDE OTHER SECTIONS
+    document.querySelectorAll("body > section").forEach(function (section) {
+
+        section.style.display = "none";
+
+    });
+
+
+    // SHOW QUIZ
+    let quizSection = document.getElementById("quizSection");
+
+    quizSection.style.display = "block";
 
 
     showQuestion();
 }
 
 
-// ===============================
 // SHOW QUESTION
-// ===============================
-
 function showQuestion() {
 
-    if (currentQuestion >= questions.length) {
+    const container = document.getElementById("quizContainer");
 
-        showResult();
-        return;
-    }
+    if (!container) {
 
-
-    const quizContainer = document.getElementById("quizContainer");
-
-    if (!quizContainer) {
-        console.error("quizContainer not found!");
+        alert("quizContainer nahi mila!");
         return;
     }
 
@@ -107,23 +115,22 @@ function showQuestion() {
     const q = questions[currentQuestion];
 
 
-    let html = `
+    container.innerHTML = `
 
-        <div class="quiz-header">
+        <div class="quiz-box">
 
             <h2>${currentSubject} Quiz</h2>
 
-            <p>
+            <h3>
                 Question ${currentQuestion + 1}
                 / ${questions.length}
-            </p>
+            </h3>
 
-        </div>
+            <div class="question">
 
+                <h2>${q.question}</h2>
 
-        <div class="question-box">
-
-            <h3>${q.question}</h3>
+            </div>
 
 
             <div class="options">
@@ -131,6 +138,7 @@ function showQuestion() {
                 ${q.options.map(function (option, index) {
 
         return `
+
                         <button
                             class="option"
                             onclick="selectAnswer(${index})">
@@ -139,22 +147,20 @@ function showQuestion() {
                             ${option}
 
                         </button>
+
                     `;
 
     }).join("")}
 
             </div>
 
-        </div>
-
-
-        <div class="quiz-footer">
 
             <div class="progress-container">
 
                 <div
                     class="progress-bar"
                     style="width:${((currentQuestion + 1) / questions.length) * 100}%">
+
                 </div>
 
             </div>
@@ -162,16 +168,10 @@ function showQuestion() {
         </div>
 
     `;
-
-
-    quizContainer.innerHTML = html;
 }
 
 
-// ===============================
 // SELECT ANSWER
-// ===============================
-
 function selectAnswer(selectedIndex) {
 
     const q = questions[currentQuestion];
@@ -186,7 +186,8 @@ function selectAnswer(selectedIndex) {
 
         if (index === q.answer) {
 
-            button.classList.add("correct");
+            button.style.background = "#22c55e";
+            button.style.color = "white";
 
         }
 
@@ -196,7 +197,8 @@ function selectAnswer(selectedIndex) {
             selectedIndex !== q.answer
         ) {
 
-            button.classList.add("wrong");
+            button.style.background = "#ef4444";
+            button.style.color = "white";
 
         }
 
@@ -212,59 +214,49 @@ function selectAnswer(selectedIndex) {
 
     setTimeout(function () {
 
-        nextQuestion();
+        currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+
+            showQuestion();
+
+        } else {
+
+            showResult();
+
+        }
 
     }, 700);
 }
 
 
-// ===============================
-// NEXT QUESTION
-// ===============================
-
-function nextQuestion() {
-
-    currentQuestion++;
-
-    showQuestion();
-
-}
-
-
-// ===============================
-// SHOW RESULT
-// ===============================
-
+// RESULT
 function showResult() {
 
-    const quizContainer =
-        document.getElementById("quizContainer");
-
+    const container = document.getElementById("quizContainer");
 
     let percentage =
         Math.round((score / questions.length) * 100);
 
 
-    quizContainer.innerHTML = `
+    container.innerHTML = `
 
-        <div class="result-box">
+        <div class="quiz-box">
 
             <h2>🎉 Quiz Completed!</h2>
 
             <h3>${currentSubject}</h3>
 
+            <h1>
+                ${score} / ${questions.length}
+            </h1>
 
-            <div class="result-score">
-
-                <h1>${score} / ${questions.length}</h1>
-
-                <p>${percentage}%</p>
-
-            </div>
+            <h2>
+                ${percentage}%
+            </h2>
 
 
             <button
-                class="btn"
                 onclick="startQuiz('${currentSubject}')">
 
                 🔄 Try Again
@@ -273,8 +265,7 @@ function showResult() {
 
 
             <button
-                class="btn"
-                onclick="goHome()">
+                onclick="location.reload()">
 
                 🏠 Home
 
@@ -286,27 +277,12 @@ function showResult() {
 }
 
 
-// ===============================
-// GO HOME
-// ===============================
+// START LEARNING
+function startLearning() {
 
-function goHome() {
-
-    window.location.href = "index.html";
-
-}
-
-
-// ===============================
-// LEARNING BUTTON
-// ===============================
-
-function startLearning(subject) {
-
-    alert(
-        "Learning section for " +
-        subject +
-        " will be available soon!"
-    );
+    document.getElementById("olevel")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
